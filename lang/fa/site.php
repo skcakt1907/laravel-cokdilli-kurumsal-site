@@ -1,0 +1,90 @@
+<?php
+
+// FGG Holding — متن‌های رابط کاربری (Farsça arayüz metinleri)
+//
+// İran/Fars ticari dilinde yerleşik karşılıklar tercih edildi:
+//   "Holding"          -> هلدینگ  (هلدینگ FGG)
+//   "Business Sectors" -> حوزه‌های فعالیت
+//   "Business Partners"-> شرکای تجاری
+//
+// Arapça ile karıştırılmamalı: Farsça'da ی ve ک harfleri farklıdır
+// (ي / ك değil), yarım boşluk (ZWNJ) kullanılır: حوزه‌های
+//
+// NOT: Farsça sağdan sola yazılır; sayfa yönü config/diller.php'deki
+// 'yon' => 'rtl' ayarından gelir.
+
+return [
+    'nav_anasayfa'         => 'صفحه اصلی',
+    'nav_kurumsal'         => 'درباره ما',
+    'nav_faaliyet'         => 'حوزه‌های فعالیت',
+    'nav_ortaklar'         => 'شرکت‌ها و شرکا',
+    'nav_haberler'         => 'اخبار',
+    'nav_iletisim'         => 'تماس با ما',
+    'tum_sektorler'        => 'همه حوزه‌های فعالیت',
+    'devamini_oku'         => 'ادامه مطلب',
+    'incele'               => 'مشاهده',
+    'daha'                 => 'حوزه دیگر',
+    'grup_mail_etiket'     => 'تماس برای این حوزه',
+    'detay'                => 'جزئیات',
+    'tumu'                 => 'مشاهده همه',
+    'geri'                 => 'بازگشت',
+    'web_sitesi'           => 'وب‌سایت',
+    'kurulus_yili'         => 'سال تأسیس',
+    'sektor'               => 'حوزه',
+    'ulke'                 => 'کشور',
+    'bulunamadi'           => 'موردی یافت نشد.',
+    'biz_kimiz'            => 'ما که هستیم',
+    'ne_yapariz'           => 'چه می‌کنیم',
+    'faaliyet_alt'         => 'حوزه‌هایی که در آن ارزش می‌آفرینیم',
+    'ortaklar_alt'         => 'شبکه بین‌المللی ما',
+    'yaklasim_baslik'      => 'رویکرد اصلی ما',
+    'neden_baslik'         => 'چرا هلدینگ FGG؟',
+    'neden_alt'            => 'مشارکت راهبردی · شبکه قدرتمند · چشم‌انداز بین‌المللی',
+    'surec_baslik'         => 'مدل توسعه پروژه ما',
+    'surec_alt'            => 'از ایده تا پروژه واقعی',
+    'bolge_baslik'         => 'شبکه بین‌المللی ما',
+    'bolge_alt'            => 'مناطق تمرکز ما',
+    'isbirligi_baslik'     => 'همکاری‌های راهبردی',
+    'isbirligi_alt'        => 'پروژه‌های بزرگ‌تر، با هم',
+    'rakamlarla'           => 'هلدینگ FGG در اعداد',
+    'sayac_yil'            => 'سال تجربه',
+    'sayac_sirket'         => 'شرکای تجاری',
+    'sayac_personel'       => 'کارکنان',
+    'sayac_sektor'         => 'حوزه‌های فعالیت',
+    'sayac_aile'           => 'گروه‌های حوزه',
+    'sayac_bolge'          => 'مناطق تمرکز',
+    'hikayemiz'            => 'داستان ما',
+    'misyon'               => 'مأموریت ما',
+    'vizyon'               => 'چشم‌انداز ما',
+    'yonetim'              => 'مدیریت ما',
+    'grup_sirketleri'      => 'شرکت‌های گروه',
+    'grup_sirketleri_alt'  => 'برندهای زیر مجموعه ما',
+    'is_ortaklari'         => 'شرکای تجاری',
+    'is_ortaklari_alt'     => 'شرکت‌هایی که با آن‌ها کار می‌کنیم',
+    'ortak_yok'            => 'جزئیات شرکا متناسب با ماهیت هر همکاری تجاری در این صفحه منتشر خواهد شد.',
+    'bize_ulasin'          => 'با ما در تماس باشید',
+    'iletisim_alt'         => 'پروژه شما را با هم توسعه دهیم',
+    'iletisim_giris'       => 'اگر در حال توسعه پروژه‌ای جدید هستید، به دنبال سرمایه‌گذاری می‌گردید، قصد ورود به بازارهای بین‌المللی را دارید یا در جستجوی شریک تجاری قابل اعتماد هستید، با هلدینگ FGG تماس بگیرید.',
+    'departman_baslik'     => 'ایمیل بخش‌ها',
+    'departman_alt'        => 'مستقیماً به واحد مربوطه بنویسید',
+    'adres'                => 'نشانی',
+    'telefon'              => 'تلفن',
+    'eposta'               => 'ایمیل',
+    'calisma_saati'        => 'ساعات کاری',
+    'form_ad'              => 'نام و نام خانوادگی',
+    'form_mail'            => 'ایمیل شما',
+    'form_tel'             => 'تلفن',
+    'videoyu_izle'         => 'تماشای ویدیو',
+    'form_konu'            => 'موضوع',
+    'form_birim'           => 'حوزه فعالیت مرتبط',
+    'form_birim_genel'     => 'عمومی / نامشخص',
+    'form_birim_ipucu'     => 'پیام شما مستقیماً به تیم حوزه انتخابی می‌رسد.',
+    'form_mesaj'           => 'پیام شما',
+    'form_gonder'          => 'ارسال پیام',
+    'form_baslik'          => 'برای ما پیام بفرستید',
+    'form_alt'             => 'فرم را تکمیل کنید، با شما تماس می‌گیریم',
+    'form_basarili'        => 'پیام شما ارسال شد. به‌زودی با شما تماس می‌گیریم.',
+    'form_hata'            => 'لطفاً فیلدهای الزامی را تکمیل کنید.',
+    'footer_kurumsal'      => 'شرکت',
+    'footer_haklar'        => 'تمامی حقوق محفوظ است.',
+];

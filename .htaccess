@@ -1,0 +1,50 @@
+# =====================================================================
+#  KÖK DİZİN KORUMASI
+#
+#  Laravel'de web'e açık olması gereken TEK klasör public/ dir.
+#  Doğru kurulum: hosting panelinden alan adının Document Root'unu
+#  .../public olarak ayarlamak. O yapıldığında bu dosya hiç okunmaz.
+#
+#  Bu dosya ikinci savunma hattıdır: docroot yanlış ayarlanırsa ya da
+#  proje kökü yanlışlıkla yayınlanırsa hassas dosyaları kapatır.
+#
+#  DOĞRULAMA NOTU: Aşağıdaki dosya ve klasör korumaları yerelde test
+#  edildi, çalışıyor (403/404 döndüler). Sondaki yönlendirme bloğu ise
+#  yerel WAMP'ta çalışmadı — sunucu yapılandırmasına bağlı. Ona güvenme;
+#  docroot'u public/ olarak ayarla.
+# =====================================================================
+
+# --- Dizin listelemeyi kapat ------------------------------------------
+Options -Indexes
+
+# --- Hassas dosyalar --------------------------------------------------
+# .env sızarsa veritabanı şifresi ve uygulama anahtarı ele geçer.
+<FilesMatch "^\.env|^\.env\..*|^composer\.(json|lock)$|^package(-lock)?\.json$|^artisan$|^phpunit\.xml$|^vite\.config\.js$">
+    Require all denied
+</FilesMatch>
+
+# Nokta ile başlayan her dosya (.git, .gitignore, .DS_Store ...)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Yayında bulunmaması gereken uzantılar
+<FilesMatch "\.(log|sql|md|lock|yml|yaml|ini|sh|bat|ps1|bak|yedek|old)$">
+    Require all denied
+</FilesMatch>
+
+# --- Uygulama klasörleri ----------------------------------------------
+# storage/ oturum, önbellek ve log dosyalarını tutar; loglarda hata
+# ayrıntıları bulunur. vendor/ üçüncü parti kod içerir.
+RedirectMatch 404 ^.*/(app|bootstrap|config|database|lang|resources|routes|storage|tests|vendor|node_modules)(/|$)
+
+# --- İstekleri public/ altına taşı (YEDEK YOL) ------------------------
+# Yalnızca docroot değiştirilemeyen hostinglerde işe yarar ve her
+# sunucuda çalışmaz. Yayına almadan önce ana sayfayı açıp doğrula.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Zaten public/ içindeki istekleri olduğu gibi bırak (döngü olmasın)
+    RewriteCond %{REQUEST_URI} !public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

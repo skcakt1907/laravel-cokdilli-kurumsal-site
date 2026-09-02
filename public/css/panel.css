@@ -1,0 +1,456 @@
+/* =========================================================================
+   FGG HOLDING — YÖNETİM PANELİ  ·  Siyah + Altın
+   Site temasıyla (css/style.css) aynı kimlik.
+   Yalnızca görsel katman: HTML yapısı ve sınıf adları değişmedi.
+   ========================================================================= */
+
+:root{
+  /* --- marka (FGG altını korunuyor) --- */
+  --ap:#d4af37;            /* altın — ana vurgu */
+  --ap-acik:#e8c65a;       /* hover / aktif altın */
+  --ap-koyu:#b48a3f;       /* bastırılmış altın */
+
+  /* --- zeminler ---
+     Saf siyah yerine sıcak-nötr koyu: yüzeyler zeminden belirgin
+     ayrışsın diye her kademe arasında gerçek bir fark var. */
+  --zemin:#0f0f0e;         /* sayfa */
+  --kenar-cubugu:#0b0b0a;  /* sol menü — zeminden geri çekilir */
+  --yuzey:#1a1a18;         /* kart, tablo, panel — zeminden yükselir */
+  --yuzey-2:#232320;       /* girdi alanı, ikinci seviye */
+  --yuzey-3:#2b2b27;       /* hover */
+
+  /* --- metin --- */
+  --metin:#f5f5f0;         /* sıcak kırık beyaz */
+  --metin-soluk:#b8b8b0;
+  --metin-sonuk:#8a8a80;   /* AA eşiğini geçecek kadar açık */
+  --baslik:#ffffff;
+
+  /* --- çizgi ---
+     Kenarlar NÖTR. Altın yalnızca gerçek vurgularda kullanılır;
+     her kenarı altın yapmak arayüzü "süslü" gösteriyordu. */
+  --cizgi:#2a2a26;
+  --cizgi-guclu:#3a3a36;
+  --cizgi-notr:#2a2a26;
+
+  /* --- gölge (katmanlı) --- */
+  --golge-sm:0 1px 2px rgba(0,0,0,.30);
+  --golge-md:0 2px 8px rgba(0,0,0,.40);
+  --golge-lg:0 8px 24px rgba(0,0,0,.50);
+  --golge-xl:0 20px 40px rgba(0,0,0,.60);
+
+  /* --- köşe --- */
+  --kose-sm:6px;
+  --kose-md:10px;
+  --kose-lg:14px;
+  --kose-xl:20px;
+
+  /* --- durum --- */
+  --basarili:#10b981;
+  --hata:#ef4444;
+  --uyari:#f59e0b;
+
+  /* Tarayıcının kendi arayüzü de koyu olsun (scrollbar, tarih seçici) */
+  color-scheme:dark;
+}
+
+/* --- Bootstrap'in kendi değişkenlerini temaya çek ---------------------
+   Böylece rengi ayrıca tanımlamadığımız bileşenler de koyu kalır ve
+   hiçbir bağlantı Bootstrap'in varsayılan mavisine (#0d6efd) düşmez. */
+:root{
+  --bs-body-bg:var(--zemin);
+  --bs-body-color:var(--metin);
+  --bs-emphasis-color:var(--baslik);
+  --bs-secondary-color:var(--metin-soluk);
+  --bs-border-color:var(--cizgi-notr);
+  --bs-link-color:var(--ap);
+  --bs-link-hover-color:var(--ap-acik);
+  --bs-link-color-rgb:212,175,55;
+  --bs-link-hover-color-rgb:232,198,90;
+  --bs-heading-color:var(--baslik);
+}
+
+body{
+  font-family:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+  background:var(--zemin);
+  color:var(--metin);
+  margin:0;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,h5,h6{color:var(--baslik)}
+a{transition:.2s}
+hr{border-color:var(--cizgi-notr);opacity:1}
+::selection{background:rgba(212,175,55,.28);color:#fff}
+
+/* Kaydırma çubuğu */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--zemin)}
+::-webkit-scrollbar-thumb{background:var(--cizgi-guclu);border-radius:6px;border:2px solid var(--zemin)}
+::-webkit-scrollbar-thumb:hover{background:var(--ap-koyu)}
+
+/* Klavye ile gezinenler için görünür odak halkası (erişilebilirlik) */
+:focus-visible{outline:2px solid var(--ap);outline-offset:2px}
+
+
+/* =========================================================================
+   SOL MENÜ
+   ========================================================================= */
+.sidebar{
+  position:fixed;left:0;top:0;bottom:0;width:250px;
+  background:var(--kenar-cubugu);
+  border-right:1px solid var(--cizgi);
+  color:var(--metin-soluk);
+  padding:1.4rem 0;overflow-y:auto;
+}
+.sidebar .brand{
+  padding:0 1.4rem 1.3rem;margin-bottom:.9rem;
+  border-bottom:1px solid var(--cizgi);
+  color:#fff;font-weight:700;font-size:1.14rem;letter-spacing:-.01em;
+}
+.sidebar .brand span{color:var(--ap)}
+.sidebar .grp{
+  padding:1.05rem 1.4rem .4rem;
+  font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase;
+  font-weight:700;color:var(--metin-sonuk);
+}
+.sidebar a{
+  display:flex;align-items:center;
+  padding:.68rem 1.4rem;
+  color:var(--metin-soluk);text-decoration:none;
+  font-size:.9rem;font-weight:500;
+  border-left:3px solid transparent;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.sidebar a i{margin-right:.7rem;width:18px;font-size:1rem;transition:color .2s}
+.sidebar a:hover{background:rgba(212,175,55,.07);color:#fff}
+.sidebar a:hover i{color:var(--ap)}
+.sidebar a.active{
+  background:rgba(212,175,55,.11);
+  color:var(--ap);border-left-color:var(--ap);font-weight:600;
+}
+.sidebar a.active i{color:var(--ap)}
+.sidebar .badge{
+  background:var(--ap);color:#0b0b0b;font-weight:700;
+  font-size:.68rem;margin-left:auto;border-radius:20px;padding:.24em .55em;
+}
+
+
+/* =========================================================================
+   ÜST ÇUBUK / İÇERİK
+   ========================================================================= */
+.main{margin-left:250px;padding:0;min-height:100vh}
+.topbar{
+  background:var(--yuzey);
+  border-bottom:1px solid var(--cizgi);
+  padding:1.05rem 2rem;
+  display:flex;justify-content:space-between;align-items:center;
+  position:sticky;top:0;z-index:20;
+}
+.topbar h1{font-size:1.2rem;margin:0;color:#fff;font-weight:700;letter-spacing:-.01em}
+.topbar .user{color:var(--metin);font-weight:600;font-size:.9rem;display:flex;align-items:center}
+.topbar .user i{color:var(--ap);margin-right:.45rem;font-size:1.15rem}
+.content{padding:2rem}
+
+
+/* =========================================================================
+   KARTLAR
+   ========================================================================= */
+.card{
+  background:var(--yuzey);
+  border:1px solid var(--cizgi);
+  border-radius:var(--kose-lg);
+  box-shadow:0 10px 30px rgba(0,0,0,.45);
+  color:var(--metin);
+}
+.card-header{
+  background:transparent;
+  border-bottom:1px solid var(--cizgi);
+  padding:1rem 1.4rem;
+  font-weight:600;color:#fff;
+  border-radius:var(--kose-lg) var(--kose-lg) 0 0!important;
+}
+.card-body{color:var(--metin)}
+
+/* Özet kutuları (dashboard) */
+.stat-card{
+  background:var(--yuzey);
+  border:1px solid var(--cizgi);
+  border-radius:var(--kose-lg);padding:1.4rem;
+  box-shadow:0 10px 30px rgba(0,0,0,.45);
+  display:flex;align-items:center;gap:1rem;
+  transition:border-color .25s,transform .25s,box-shadow .25s;
+}
+.stat-card:hover{
+  border-color:rgba(212,175,55,.45);
+  transform:translateY(-3px);
+  box-shadow:0 18px 40px rgba(0,0,0,.6);
+}
+.stat-card .icon{
+  width:55px;height:55px;flex:0 0 55px;border-radius:var(--kose-lg);
+  background:rgba(212,175,55,.12);color:var(--ap);
+  display:flex;align-items:center;justify-content:center;font-size:1.6rem;
+  transition:.25s;
+}
+.stat-card:hover .icon{background:var(--ap);color:#0b0b0b}
+.stat-card h3{margin:0;color:#fff;font-size:1.7rem;font-weight:700;letter-spacing:-.02em}
+.stat-card p{margin:0;color:var(--metin-soluk);font-size:.88rem}
+
+
+/* =========================================================================
+   BUTONLAR
+   ========================================================================= */
+.btn{font-weight:600;border-radius:8px;transition:.22s}
+.btn-sm{font-size:.82rem;padding:.34rem .75rem}
+
+.btn-primary{
+  background:var(--ap);border-color:var(--ap);color:#0b0b0b;
+}
+.btn-primary:hover,.btn-primary:focus{
+  background:var(--ap-acik);border-color:var(--ap-acik);color:#0b0b0b;
+}
+.btn-primary:active,.btn-primary:disabled{
+  background:var(--ap-koyu)!important;border-color:var(--ap-koyu)!important;color:#0b0b0b!important;
+}
+
+.btn-outline-primary{color:var(--ap);border-color:rgba(212,175,55,.5);background:transparent}
+.btn-outline-primary:hover{background:var(--ap);border-color:var(--ap);color:#0b0b0b}
+
+.btn-outline-secondary{color:var(--metin-soluk);border-color:var(--cizgi-notr);background:transparent}
+.btn-outline-secondary:hover{background:var(--yuzey-3);border-color:var(--metin-sonuk);color:#fff}
+
+.btn-outline-danger{color:var(--hata);border-color:rgba(224,82,96,.45);background:transparent}
+.btn-outline-danger:hover{background:var(--hata);border-color:var(--hata);color:#fff}
+
+.btn-link{color:var(--ap)}
+.btn-link:hover{color:var(--ap-acik)}
+
+
+/* =========================================================================
+   TABLOLAR
+   ========================================================================= */
+.table{
+  --bs-table-bg:transparent;
+  --bs-table-color:var(--metin);
+  --bs-table-border-color:var(--cizgi-notr);
+  --bs-table-hover-bg:rgba(212,175,55,.06);
+  --bs-table-hover-color:#fff;
+  color:var(--metin);margin-bottom:0;
+}
+.table thead th{
+  background:var(--yuzey-2);
+  color:var(--ap);
+  font-weight:700;font-size:.78rem;
+  letter-spacing:.6px;text-transform:uppercase;
+  border-bottom:1px solid var(--cizgi);
+  padding:.85rem 1rem;white-space:nowrap;
+}
+.table tbody td{
+  border-bottom:1px solid var(--cizgi-notr);
+  padding:.8rem 1rem;vertical-align:middle;
+}
+.table tbody tr:last-child td{border-bottom:none}
+.table-hover tbody tr{transition:background .18s}
+.table-responsive{border-radius:var(--kose-lg)}
+
+
+/* =========================================================================
+   FORMLAR
+   ========================================================================= */
+.form-label{font-weight:600;color:var(--metin);font-size:.87rem;margin-bottom:.4rem}
+
+.form-control,.form-select{
+  background:var(--yuzey-2);
+  border:1px solid var(--cizgi-notr);
+  color:var(--metin);
+  border-radius:8px;padding:.6rem .9rem;
+  transition:border-color .2s,box-shadow .2s,background .2s;
+}
+.form-control::placeholder{color:var(--metin-sonuk)}
+.form-control:focus,.form-select:focus{
+  background:var(--yuzey-3);
+  border-color:var(--ap);
+  color:#fff;
+  box-shadow:0 0 0 .18rem rgba(212,175,55,.16);
+}
+.form-control:disabled,.form-control[readonly]{background:#101010;color:var(--metin-sonuk)}
+
+/* Açılır liste oku — koyu zeminde görünmesi için altın */
+.form-select{
+  background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23d4af37' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  /* Üstteki kısayol background: kuralı bu üçünü sıfırlıyor;
+     yazılmazsa ok döşenerek tekrar ediyor. */
+  background-repeat:no-repeat;
+  background-position:right .85rem center;
+  background-size:13px 10px;
+  padding-right:2.4rem;      /* metin okun altına girmesin */
+  appearance:none;
+}
+.form-select option{background:var(--yuzey-2);color:var(--metin)}
+
+.form-text{color:var(--metin-soluk);font-size:.8rem}
+
+/* Onay kutusu / radyo */
+.form-check-input{
+  background-color:var(--yuzey-2);
+  border-color:rgba(255,255,255,.22);
+}
+.form-check-input:checked{background-color:var(--ap);border-color:var(--ap)}
+.form-check-input:focus{border-color:var(--ap);box-shadow:0 0 0 .18rem rgba(212,175,55,.16)}
+.form-check-label{color:var(--metin);font-size:.9rem}
+
+/* Dosya seçme butonu */
+.form-control[type=file]::file-selector-button{
+  background:var(--yuzey-3);color:var(--metin);
+  border:0;border-right:1px solid var(--cizgi-notr);
+  padding:.6rem .9rem;margin:-.6rem .9rem -.6rem -.9rem;
+  transition:.2s;
+}
+.form-control[type=file]:hover::file-selector-button{background:var(--ap);color:#0b0b0b}
+
+
+/* =========================================================================
+   SEKMELER  (TR / EN)
+   ========================================================================= */
+.nav-tabs{border-bottom:1px solid var(--cizgi)}
+.nav-tabs .nav-link{
+  border:none;background:transparent;
+  color:var(--metin-soluk);font-weight:600;font-size:.88rem;
+  padding:.55rem 1.1rem;border-bottom:2px solid transparent;
+}
+.nav-tabs .nav-link:hover{color:#fff;border-color:transparent}
+.nav-tabs .nav-link.active{
+  color:var(--ap);background:transparent;
+  border-bottom-color:var(--ap);
+}
+
+.lang-tabs{border-bottom:2px solid var(--cizgi);margin-bottom:1.2rem}
+.lang-tabs .nav-link{
+  border:none;color:var(--metin-soluk);
+  font-weight:600;font-size:.88rem;padding:.55rem 1.1rem;
+}
+.lang-tabs .nav-link:hover{color:#fff}
+.lang-tabs .nav-link.active{
+  color:var(--ap);
+  border-bottom:2px solid var(--ap);
+  margin-bottom:-2px;background:transparent;
+}
+/* Küçük punto — kontrast eşiğini geçmesi için soluk değil orta ton */
+.en-hint{font-size:.78rem;color:var(--metin-soluk);margin-bottom:1rem}
+
+
+/* =========================================================================
+   UYARI KUTULARI / ROZETLER / LİSTELER
+   ========================================================================= */
+.alert{border-radius:10px;border-width:1px;font-size:.9rem}
+.alert-success{background:rgba(76,175,125,.1);border-color:rgba(76,175,125,.35);color:#8fdcb4}
+.alert-danger{background:rgba(224,82,96,.1);border-color:rgba(224,82,96,.35);color:#f0a6ad}
+.alert-light{background:var(--yuzey-2);border-color:var(--cizgi-notr);color:var(--metin)}
+.alert .alert-link{color:var(--ap)}
+
+.badge{font-weight:600;letter-spacing:.2px}
+.badge.bg-secondary{background:var(--yuzey-3)!important;color:var(--metin-soluk)!important}
+.badge.bg-success{background:rgba(76,175,125,.16)!important;color:#8fdcb4!important}
+.badge.bg-warning{background:rgba(212,175,55,.16)!important;color:var(--ap)!important}
+.badge.bg-light{background:var(--yuzey-3)!important;color:var(--metin)!important}
+
+.list-group{--bs-list-group-bg:transparent;--bs-list-group-color:var(--metin)}
+.list-group-item{
+  background:transparent;color:var(--metin);
+  border-color:var(--cizgi-notr);
+}
+.list-group-flush .list-group-item{border-left:0;border-right:0}
+
+/* Bootstrap'in açık zemin yardımcı sınıfları koyu temada ters düşüyordu */
+.bg-light{background:var(--yuzey-2)!important}
+.text-dark{color:var(--metin)!important}
+.text-muted{color:var(--metin-soluk)!important}
+.text-warning{color:var(--ap)!important}
+.border{border-color:var(--cizgi-notr)!important}
+
+
+/* =========================================================================
+   MOBİL
+   ========================================================================= */
+@media(max-width:768px){
+  .sidebar{width:60px}
+  .sidebar .brand,.sidebar .grp,.sidebar a span{display:none}
+  .sidebar a{justify-content:center;padding:.8rem 0;border-left-width:0;border-left:0}
+  .sidebar a i{margin-right:0}
+  .sidebar a.active{border-left:0;box-shadow:inset 3px 0 0 var(--ap)}
+  .sidebar .badge{
+    margin-left:0;position:absolute;transform:translate(14px,-12px);
+    padding:.15em .4em;font-size:.6rem;
+  }
+  .main{margin-left:60px}
+  .topbar{padding:.9rem 1rem}
+  .topbar h1{font-size:1.02rem}
+  .content{padding:1.1rem}
+}
+
+
+/* =========================================================================
+   AYARLAR ALT MENÜSÜ
+   Ayarlar tek dev sayfa değil; her bölüm kendi sayfasında açılır ve solda
+   bu menü durur. Görsel dil sol kenar çubuğuyla aynı: altın vurgu +
+   sol kenar çizgisi.
+   Kullanan görünümler: panel/ayar/_nav.blade.php, panel/ayar/bolum.blade.php
+   ========================================================================= */
+.ayar-duzen{
+  display:grid;
+  grid-template-columns:230px minmax(0,1fr);
+  gap:1.4rem;
+  align-items:start;
+}
+
+.ayar-yan{
+  background:var(--yuzey);
+  border:1px solid var(--cizgi);
+  border-radius:12px;
+  padding:.5rem 0;
+  position:sticky;
+  top:1rem;
+  overflow:hidden;
+}
+
+.ayar-grup{
+  padding:.85rem 1rem .4rem;
+  font-size:.68rem;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+  color:var(--metin-sonuk);
+  font-weight:700;
+}
+.ayar-grup:first-child{padding-top:.5rem}
+
+.ayar-yan a{
+  display:flex;align-items:center;
+  padding:.6rem 1rem;
+  color:var(--metin-soluk);text-decoration:none;
+  font-size:.88rem;font-weight:500;
+  border-left:3px solid transparent;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.ayar-yan a i{margin-right:.65rem;width:18px;font-size:.98rem;transition:color .2s}
+.ayar-yan a:hover{background:var(--yuzey-3);color:var(--metin)}
+.ayar-yan a.aktif{
+  background:rgba(212,175,55,.11);
+  color:var(--ap);border-left-color:var(--ap);font-weight:600;
+}
+.ayar-yan a.aktif i{color:var(--ap)}
+
+.ayar-icerik{min-width:0}   /* grid çocuğu taşmasın: uzun tablolar kırpılsın */
+
+/* Dar ekranda menü üstte yatay şeride döner */
+@media (max-width:900px){
+  .ayar-duzen{grid-template-columns:1fr}
+  .ayar-yan{
+    position:static;
+    display:flex;flex-wrap:wrap;gap:.2rem;
+    padding:.5rem;
+  }
+  .ayar-grup{display:none}
+  .ayar-yan a{
+    border-left:none;border-bottom:2px solid transparent;
+    border-radius:8px;padding:.5rem .7rem;
+  }
+  .ayar-yan a.aktif{border-left:none;border-bottom-color:var(--ap)}
+}

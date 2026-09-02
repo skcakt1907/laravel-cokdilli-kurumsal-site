@@ -1,0 +1,22 @@
+# uploads/ içinde hiçbir şey ÇALIŞTIRILMAZ — yalnızca statik dosya servis edilir.
+# Not: php_flag/php_value yalnızca PHP modül olarak çalışırken geçerlidir;
+# FastCGI/FPM altında "Internal Server Error" verir. Bu yüzden IfModule ile sarılı.
+<IfModule mod_php.c>
+  php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+  php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+  php_flag engine off
+</IfModule>
+
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .pht .phar
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .pht .phar
+AddType text/plain .php .phtml .php3 .php4 .php5 .php7 .php8 .pht .phar
+
+<FilesMatch "\.(php|phtml|php[3-8]|pht|phar|pl|py|cgi|sh|asp|aspx|jsp|htaccess)$">
+  Require all denied
+</FilesMatch>
+
+Options -ExecCGI -Indexes
